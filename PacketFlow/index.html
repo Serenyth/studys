@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PacketFlow · 计算机网络可视化学习平台</title>
+<meta name="description" content="用动画、Canvas 与可交互模型，系统学习计算机网络七个阶段：分层模型、物理层与链路层、IP 编址、传输层、应用层、网络设备与拓扑、网络安全。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<!-- 背景层 -->
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <canvas id="bgCanvas"></canvas>
+  <div class="bg-vignette"></div>
+</div>
+
+<!-- 顶部导航 -->
+<header class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <button class="icon-btn nav-toggle" id="navToggle" aria-label="打开目录">
+      <span class="burger"><i></i><i></i><i></i></span>
+    </button>
+
+    <a class="brand" href="#/home" data-link>
+      <span class="brand-mark" id="brandMark"></span>
+      <span class="brand-copy">
+        <b>PacketFlow</b>
+        <em>计算机网络 · 可视化学习</em>
+      </span>
+    </a>
+
+    <button class="search-trigger" id="searchTrigger">
+      <span class="search-trigger-icon" data-icon="search"></span>
+      <span>搜索知识点 / 术语 / 协议…</span>
+      <kbd>/</kbd>
+    </button>
+
+    <div class="topbar-right">
+      <div class="ring-progress" title="学习进度">
+        <svg viewBox="0 0 40 40">
+          <circle class="rp-bg" cx="20" cy="20" r="16.5"></circle>
+          <circle class="rp-fg" id="ringFg" cx="20" cy="20" r="16.5"></circle>
+        </svg>
+        <span id="ringText">0%</span>
+      </div>
+      <button class="icon-btn" id="themeToggle" aria-label="切换主题">
+        <span data-icon="moon" class="i-moon"></span>
+        <span data-icon="sun" class="i-sun"></span>
+      </button>
+    </div>
+  </div>
+  <div class="scroll-line"><i id="scrollLine"></i></div>
+</header>
+
+<!-- 侧边栏 -->
+<aside class="sidebar" id="sidebar">
+  <nav class="side-nav" id="sideNav"></nav>
+  <div class="side-foot">
+    <div class="side-progress">
+      <div class="sp-head"><span>学习进度</span><b id="spPct">0%</b></div>
+      <div class="sp-track"><i id="spFill"></i></div>
+      <div class="sp-sub" id="spSub">已完成 0 / 7 阶段</div>
+    </div>
+    <button class="ghost-btn" id="resetProgress" data-icon="refresh">重置进度</button>
+  </div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<!-- 主体 -->
+<main id="main">
+  <section class="view" id="viewHome"></section>
+  <section class="view" id="viewStage"></section>
+</main>
+
+<footer class="site-foot" id="siteFoot">
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <span class="brand-mark small" id="footMark"></span>
+      <p><b>PacketFlow</b> · 把计算机网络七个阶段，变成可以点、可以拖、可以看动画的模型。</p>
+    </div>
+    <div class="foot-meta">
+      <span>内容整理自 7 份阶段学习笔记</span>
+      <span class="dot"></span>
+      <span id="footStat">— 个知识点 · — 个交互实验</span>
+    </div>
+  </div>
+</footer>
+
+<!-- 回到顶部 -->
+<button class="to-top" id="toTop" aria-label="回到顶部" data-icon="arrow-up"></button>
+
+<!-- 搜索面板 -->
+<div class="search-panel" id="searchPanel">
+  <div class="search-box">
+    <div class="search-head">
+      <span data-icon="search"></span>
+      <input id="searchInput" type="text" placeholder="输入关键词，例如：子网掩码 / 三次握手 / VLAN / TLS" autocomplete="off" spellcheck="false">
+      <kbd>ESC</kbd>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- 术语浮层 -->
+<div class="tip" id="tip"></div>
+
+<script src="js/core.js"></script>
+<script src="js/stages/s1.js"></script>
+<script src="js/stages/s2.js"></script>
+<script src="js/stages/s3.js"></script>
+<script src="js/stages/s4.js"></script>
+<script src="js/stages/s5.js"></script>
+<script src="js/stages/s6.js"></script>
+<script src="js/stages/s7.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

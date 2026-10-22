@@ -1,0 +1,113 @@
+/* ══════════════════════════════════════════════════════════
+   日间 / 夜间主题
+   默认（:root）为「机房控制台」深色；[data-theme="light"] 为「工程图纸」浅色。
+   两个主题只改令牌值，不改结构 —— 这也是可维护性的关键。
+   ══════════════════════════════════════════════════════════ */
+
+[data-theme="light"]{
+  /* ── 画布 ── */
+  --bg:            #eef3f9;
+  --bg-2:          #e6eef7;
+  --surface:       #ffffff;
+  --surface-2:     #f7fafd;
+  --surface-3:     #e9f0f8;
+  --line:          rgba(15,42,74,.14);
+  --line-2:        rgba(15,42,74,.26);
+  --line-hot:      rgba(14,116,144,.5);
+
+  /* ── 文字层级（浅底下逐级加深）── */
+  --txt:           #16202e;
+  --txt-2:         #33475e;
+  --txt-3:         #4b6076;
+  --txt-4:         #5a6e85;
+  --txt-hi:        #0a1420;
+  --txt-dim:       #64798f;
+
+  /* ── 信号色：浅底必须加深，否则对比度不足 ── */
+  --a:             #0e7490;
+  --a-dim:         rgba(14,116,144,.12);
+  --warn:          #b45309;
+  --danger:        #be123c;
+  --ok:            #047857;
+  --violet:        #6d28d9;
+  --lime:          #4d7c0f;
+
+  /* ── Canvas / SVG 适配基数 ── */
+  --rgb-bg:        238,243,249;
+  --rgb-grid:      30,58,90;
+  --rgb-panel:     255,255,255;
+  --rgb-panel-2:   255,255,255;
+  --rgb-panel-3:   239,245,251;
+  --rgb-rack-1:    227,236,245;
+  --rgb-rack-2:    236,243,250;
+  --rgb-rack-3:    232,240,248;
+  --rgb-rack-4:    228,237,246;
+  --rgb-hot:       190,18,60;
+  --rgb-warm:      180,83,9;
+  --rgb-cool:      3,105,161;
+  --rgb-mist:      14,116,144;
+  --rgb-a:         14,116,144;
+  --rgb-violet:    109,40,217;
+  --rgb-warn:      180,83,9;
+  --rgb-danger:    190,18,60;
+  --rgb-ok:        4,120,87;
+  --rgb-hilite:    255,255,255;
+  --rgb-shadow:    30,58,90;
+  --sig-cyan:      #0369a1;
+  --sig-violet:    #6d28d9;
+  --sig-amber:     #b45309;
+  --sig-green:     #047857;
+  --sig-rose:      #be123c;
+  --on-st:         #ffffff;
+  --on-signal:     #ffffff;
+
+  /* ── 氛围 ── */
+  --grain-op:      .018;
+  --glow-1:        rgba(14,116,144,.08);
+  --glow-2:        rgba(109,40,217,.06);
+  --glow-3:        rgba(4,120,87,.05);
+  --surface-viz:   linear-gradient(178deg,#ffffff,#f1f6fb);
+  --code-inline:   #0e7490;
+  --hero-grad:     linear-gradient(100deg,#0e7490,#0369a1 34%,#6d28d9 66%,#4d7c0f);
+  --btn-primary-bg: linear-gradient(135deg,#0891b2,#0e7490);
+
+  /* ── 玻璃 / 浮层 ── */
+  --topbar-bg:     linear-gradient(180deg,rgba(255,255,255,.94),rgba(238,243,249,.84));
+  --sidebar-bg:    linear-gradient(180deg,rgba(255,255,255,.92),rgba(238,243,249,.96));
+  --glass-bg:      rgba(255,255,255,.78);
+  --glass-bg-2:    rgba(255,255,255,.96);
+  --mask-bg:       rgba(214,228,242,.66);
+  --float-bg:      linear-gradient(180deg,#ffffff,#f4f8fc);
+  --sh-1: 0 1px 0 rgba(255,255,255,.9) inset, 0 8px 22px -14px rgba(15,42,74,.3);
+  --sh-2: 0 24px 60px -28px rgba(15,42,74,.4);
+}
+
+/* 代码块与命令面板保持深色：既是「控制台」的视觉锚点，
+   也让语法高亮的对比度在两种主题下都稳定 */
+[data-theme="light"] .code,
+[data-theme="light"] .code-bar{
+  --line: rgba(125,175,225,.16);
+  --line-2: rgba(125,175,225,.3);
+  --txt-3: #b6c9dd;
+  --txt-4: #8fa4bb;
+  --a: #38d9ee;
+}
+[data-theme="light"] .code{ background:var(--code-bg); }
+[data-theme="light"] .code-bar{ background:rgba(16,26,43,.55); }
+[data-theme="light"] .code-bar .fname{ color:#b6c9dd; }
+
+/* ── 日间微调 ── */
+[data-theme="light"] .hero h1{ text-shadow:0 6px 26px rgba(30,58,90,.16); }
+[data-theme="light"] .hero-canvas{ opacity:.55; }
+[data-theme="light"] .viz::after{ opacity:.5; }
+[data-theme="light"] .viz{ box-shadow:0 10px 30px -22px rgba(15,42,74,.35); }
+[data-theme="light"] .sc-num{ -webkit-text-stroke:1.4px color-mix(in srgb, var(--st) 55%, #fff); }
+[data-theme="light"] .ru .leds i{ box-shadow:none; }
+[data-theme="light"] #grain{ mix-blend-mode:multiply; }
+[data-theme="light"] .timeline::before{ opacity:.5; }
+[data-theme="light"] .tl-row::before{ box-shadow:none; }
+[data-theme="light"] .dot-a{ box-shadow:none; }
+[data-theme="light"] .stage-card:hover{ box-shadow:0 26px 56px -30px color-mix(in srgb, var(--st) 55%, transparent); }
+
+/* 日间下 canvas 上的深色「发光」投影会发灰，收敛一点 */
+[data-theme="light"] .brand-mark{ box-shadow:0 6px 18px -10px color-mix(in srgb, var(--a) 55%, transparent); }

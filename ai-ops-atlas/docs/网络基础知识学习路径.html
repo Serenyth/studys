@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网络基础知识系统化学习路径</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --text:#1f2328; --muted:#6b7280;
+    --border:#e6e8eb; --border-strong:#d5d8dc;
+    --blue:#378ADD; --teal:#1D9E75; --purple:#7F77DD; --amber:#BA7517;
+    --coral:#D85A30; --green:#639922; --red:#E24B4A; --gray:#5F5E5A;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Consolas,"Liberation Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px; line-height:1.7;
+  }
+  .wrap{max-width:1000px; margin:0 auto; padding:48px 28px 80px;}
+
+  /* ---------- header ---------- */
+  header.hero{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:36px 40px; margin-bottom:28px;
+  }
+  .kicker{font-size:12px; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase; margin:0 0 12px;}
+  h1{font-size:30px; line-height:1.3; margin:0 0 14px; font-weight:650; letter-spacing:-.01em;}
+  .lead{color:var(--muted); font-size:15px; margin:0 0 24px; max-width:74ch;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .meta{
+    background:var(--bg); border:1px solid var(--border); border-radius:10px;
+    padding:10px 16px; min-width:132px;
+  }
+  .meta b{display:block; font-size:19px; font-weight:650; line-height:1.3;}
+  .meta span{font-size:12px; color:var(--muted);}
+
+  /* ---------- section ---------- */
+  section{margin-bottom:34px;}
+  h2.sec{
+    font-size:20px; font-weight:650; margin:0 0 6px; letter-spacing:-.01em;
+    display:flex; align-items:center; gap:10px;
+  }
+  h2.sec::before{content:""; width:4px; height:19px; border-radius:2px; background:var(--blue);}
+  .sec-sub{color:var(--muted); font-size:13.5px; margin:0 0 18px 14px;}
+
+  /* ---------- overview table ---------- */
+  .table-card{background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th{background:#fafbfc; text-align:left; font-weight:600; color:var(--muted); font-size:12px;
+     letter-spacing:.05em; padding:12px 16px; border-bottom:1px solid var(--border); white-space:nowrap;}
+  td{padding:12px 16px; border-bottom:1px solid var(--border); vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:#fbfcfd;}
+  td.stage-name{font-weight:600; white-space:nowrap;}
+  .dot{display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:8px; vertical-align:1px;}
+
+  /* ---------- stage cards ---------- */
+  .stage{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:0; margin-bottom:22px; overflow:hidden;
+  }
+  .stage-head{
+    display:flex; align-items:flex-start; gap:16px; padding:22px 26px 18px;
+    border-bottom:1px solid var(--border); background:#fcfcfd;
+  }
+  .badge{
+    flex:0 0 auto; width:42px; height:42px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:650; color:#fff; letter-spacing:.02em;
+  }
+  .stage-head h3{font-size:17.5px; font-weight:650; margin:1px 0 4px; letter-spacing:-.01em;}
+  .stage-head .sub{font-size:12.5px; color:var(--muted); margin:0;}
+  .stage-head .sub em{font-style:normal; color:var(--text); font-weight:500;}
+  .stage-body{padding:22px 26px 24px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:760px){ .grid2{grid-template-columns:1fr;} }
+  .panel h4{
+    font-size:12px; font-weight:600; letter-spacing:.08em; color:var(--muted);
+    text-transform:uppercase; margin:0 0 10px;
+  }
+  .panel ul{margin:0; padding-left:0; list-style:none;}
+  .panel li{position:relative; padding-left:18px; margin-bottom:7px; font-size:14px; line-height:1.65;}
+  .panel li::before{
+    content:""; position:absolute; left:3px; top:9px; width:5px; height:5px;
+    border-radius:50%; background:var(--border-strong);
+  }
+  .panel li b{font-weight:600;}
+
+  .order-block{margin-top:20px; padding-top:18px; border-top:1px dashed var(--border);}
+  .chain{display:flex; flex-wrap:wrap; align-items:center; gap:7px;}
+  .chip{
+    background:#f4f6f8; border:1px solid var(--border); border-radius:8px;
+    padding:5px 11px; font-size:13px; white-space:nowrap;
+  }
+  .arrow{color:#b8bcc2; font-size:13px;}
+  .practice{
+    margin-top:18px; background:#f7f9fc; border:1px solid #e3ecf7; border-left:3px solid var(--blue);
+    border-radius:0 9px 9px 0; padding:12px 16px; font-size:13.5px;
+  }
+  .practice b{color:var(--blue); font-weight:600;}
+  .tag{
+    display:inline-block; font-size:11px; font-weight:600; letter-spacing:.06em;
+    padding:2px 8px; border-radius:20px; margin-left:8px; vertical-align:2px;
+  }
+  .tag.core{background:#eaf3fd; color:#1c5fa8;}
+  .tag.base{background:#eef7f2; color:#12694d;}
+  .tag.adv{background:#f3f0fd; color:#544aa8;}
+
+  /* ---------- callout ---------- */
+  .callout{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:22px 26px;
+  }
+  .callout p{margin:0 0 10px; font-size:14px;}
+  .callout p:last-child{margin-bottom:0;}
+
+  /* ---------- tools grid ---------- */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px;
+  }
+  .card h4{margin:0 0 10px; font-size:14px; font-weight:650;}
+  .card ul{margin:0; padding-left:16px;}
+  .card li{font-size:13.5px; margin-bottom:6px; line-height:1.6;}
+  code{
+    font-family:var(--mono); font-size:12.5px; background:#f2f4f6;
+    border:1px solid var(--border); border-radius:5px; padding:1px 6px; color:#3d4451;
+  }
+
+  /* ---------- checklist ---------- */
+  .check{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:9px 22px;}
+  @media (max-width:760px){ .check{grid-template-columns:1fr;} }
+  .check li{position:relative; padding-left:26px; font-size:14px; line-height:1.6;}
+  .check li::before{
+    content:""; position:absolute; left:0; top:4px; width:15px; height:15px;
+    border:1.5px solid var(--border-strong); border-radius:4px;
+  }
+
+  footer{margin-top:40px; padding-top:20px; border-top:1px solid var(--border);
+         color:var(--muted); font-size:12.5px; text-align:center;}
+
+  @media print{
+    body{background:#fff; font-size:12px;}
+    .wrap{max-width:none; padding:0;}
+    .stage,.card,.callout,.table-card,header.hero{break-inside:avoid; box-shadow:none;}
+    section{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="kicker">学习路径 · 计算机网络</p>
+  <h1>网络基础知识系统化学习路径</h1>
+  <p class="lead">从零基础到具备独立组网与排障能力，按「分层模型 → 各层协议 → 设备与拓扑 → 安全 → 实战」的主线拆分为 8 个阶段。每个阶段给出学习目标、重点知识点、推荐学习顺序与实践任务，由浅入深、循序渐进。</p>
+  <div class="meta-row">
+    <div class="meta"><b>8 个阶段</b><span>由基础到进阶</span></div>
+    <div class="meta"><b>约 10–12 周</b><span>每天 1–2 小时</span></div>
+    <div class="meta"><b>4 大核心</b><span>IP 编址 / 传输层 / 应用层 / 安全</span></div>
+    <div class="meta"><b>3 条主线</b><span>理论 · 抓包 · 模拟器实操</span></div>
+  </div>
+</header>
+
+<section>
+  <h2 class="sec">阶段总览</h2>
+  <p class="sec-sub">先看全局，再逐层深入。建议严格按序号推进，后一阶段依赖前一阶段的基础。</p>
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr><th>阶段</th><th>主题</th><th>核心内容</th><th>建议时长</th><th>定位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--blue)"></span>01</td><td>网络入门与分层模型</td><td>网络概念、OSI 七层、TCP/IP 四层、数据封装</td><td>1 周</td><td>基础</td></tr>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--teal)"></span>02</td><td>物理层与数据链路层</td><td>传输介质、以太网、MAC、交换机、VLAN、ARP</td><td>1 周</td><td>基础</td></tr>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--purple)"></span>03</td><td>网络层与 IP 编址</td><td>IPv4/IPv6、子网划分、CIDR、路由、NAT、ICMP</td><td>2 周</td><td><b>核心</b></td></tr>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--amber)"></span>04</td><td>传输层与端到端通信</td><td>TCP/UDP、三次握手四次挥手、流量与拥塞控制</td><td>1 周</td><td>核心</td></tr>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--coral)"></span>05</td><td>应用层协议族</td><td>HTTP/HTTPS、DNS、DHCP、FTP、SSH 等</td><td>2 周</td><td><b>核心</b></td></tr>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--green)"></span>06</td><td>网络设备与拓扑结构</td><td>设备工作层次、拓扑类型、三层组网、无线网络</td><td>1 周</td><td>应用</td></tr>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--red)"></span>07</td><td>网络安全基础</td><td>加密与 PKI、TLS、防火墙、VPN、常见攻击</td><td>2 周</td><td>核心</td></tr>
+        <tr><td class="stage-name"><span class="dot" style="background:var(--gray)"></span>08</td><td>进阶方向与实战</td><td>抓包排障、自动化、云网络、容器网络、SDN</td><td>持续</td><td>进阶</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">阶段详解</h2>
+  <p class="sec-sub">每个阶段按「学习目标 → 重点知识点 → 推荐顺序 → 实践任务」四步展开。</p>
+
+  <!-- ================= 01 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--blue)">01</div>
+      <div>
+        <h3>网络入门与分层模型<span class="tag base">基础</span></h3>
+        <p class="sub">打地基 · 建议 <em>1 周</em> · 难度 ★☆☆☆☆</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>建立「网络是什么、为什么必须分层」的整体认知</li>
+            <li>能准确说出 OSI 七层与 TCP/IP 四层每一层的职责</li>
+            <li>能完整描述数据从发送端到接收端的封装与解封装过程</li>
+            <li>认识带宽、时延、吞吐量、丢包率等基本性能指标</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>网络分类</b>：PAN / LAN / MAN / WAN 与互联网的组成</li>
+            <li><b>协议与协议栈</b>：为什么需要分层、分层带来的好处</li>
+            <li><b>OSI 七层模型</b>：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层</li>
+            <li><b>TCP/IP 四层模型</b>：网络接口层、网络层、传输层、应用层，与 OSI 的对应关系</li>
+            <li><b>数据封装</b>：数据 → 段 → 包 → 帧 → 比特，以及 PDU 概念</li>
+            <li><b>性能指标</b>：带宽 vs 吞吐量、RTT、抖动、丢包率</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">为什么要分层</span><span class="arrow">→</span>
+          <span class="chip">OSI 七层（口诀：物数网传会表应）</span><span class="arrow">→</span>
+          <span class="chip">TCP/IP 四层对照</span><span class="arrow">→</span>
+          <span class="chip">封装与解封装</span><span class="arrow">→</span>
+          <span class="chip">性能指标</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>用 <code>ping</code> 访问一个网站，同时用 Wireshark 抓包，观察同一份数据在以太网帧、IP 包、ICMP 报文三个层次上的结构差异。</div>
+    </div>
+  </article>
+
+  <!-- ================= 02 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--teal)">02</div>
+      <div>
+        <h3>物理层与数据链路层<span class="tag base">基础</span></h3>
+        <p class="sub">局域网如何工作 · 建议 <em>1 周</em> · 难度 ★★☆☆☆</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>理解信号如何在物理介质中传输与编码</li>
+            <li>掌握以太网帧结构与 MAC 地址的作用</li>
+            <li>理解交换机如何基于 MAC 地址表转发数据</li>
+            <li>理解 ARP 如何完成「IP 地址 → MAC 地址」的解析</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>传输介质</b>：双绞线（Cat5e/6/6a）、光纤（单模/多模）、无线</li>
+            <li><b>信号基础</b>：数字信号、编码与调制、单工/半双工/全双工</li>
+            <li><b>以太网与帧</b>：Ethernet II 帧结构、MTU、CRC 校验</li>
+            <li><b>MAC 地址</b>：48 位、OUI、单播/组播/广播</li>
+            <li><b>交换机原理</b>：MAC 地址表、泛洪、转发、冲突域与广播域</li>
+            <li><b>VLAN 与 Trunk</b>：802.1Q 标签、端口类型</li>
+            <li><b>STP 生成树</b>：环路危害与冗余链路</li>
+            <li><b>ARP 协议</b>：请求/应答、ARP 缓存、ARP 欺骗隐患</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">传输介质与信号</span><span class="arrow">→</span>
+          <span class="chip">以太网帧与 MAC</span><span class="arrow">→</span>
+          <span class="chip">交换机工作原理</span><span class="arrow">→</span>
+          <span class="chip">VLAN / Trunk</span><span class="arrow">→</span>
+          <span class="chip">STP</span><span class="arrow">→</span>
+          <span class="chip">ARP</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>在 Cisco Packet Tracer 中用两台交换机 + 四台主机搭建局域网，划分两个 VLAN 并配置 Trunk 互联；用 <code>arp -a</code> 观察 ARP 缓存表的变化。</div>
+    </div>
+  </article>
+
+  <!-- ================= 03 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--purple)">03</div>
+      <div>
+        <h3>网络层与 IP 编址<span class="tag core">核心</span></h3>
+        <p class="sub">整个路径的重点与难点 · 建议 <em>2 周</em> · 难度 ★★★★☆</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>熟练完成 IPv4 地址、子网掩码、网络地址与广播地址的计算</li>
+            <li>能独立完成子网划分、VLSM 与 CIDR 聚合</li>
+            <li>理解路由表结构与路由器逐跳转发的过程</li>
+            <li>掌握 NAT 原理与 IPv6 基础，理解两者解决的核心问题</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>IPv4 地址</b>：32 位结构、A/B/C/D/E 类、私有地址段、特殊地址</li>
+            <li><b>子网掩码</b>：网络位/主机位、可用主机数计算（2<sup>n</sup>−2）</li>
+            <li><b>子网划分</b>：等长子网、VLSM 变长子网、CIDR 无类域间路由与路由聚合</li>
+            <li><b>IP 报文头</b>：TTL、协议号、标识/标志/片偏移、校验和</li>
+            <li><b>路由原理</b>：路由表、最长前缀匹配、默认路由、直连/静态/动态路由</li>
+            <li><b>动态路由协议</b>：RIP、OSPF、BGP 的定位与差异（先会用，再深入）</li>
+            <li><b>NAT / NAPT</b>：私有地址上网、端口映射、静态与动态 NAT</li>
+            <li><b>ICMP</b>：ping、traceroute 的原理与常见差错报文</li>
+            <li><b>IPv6</b>：128 位地址、地址类型、与 IPv4 的迁移方案</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">IP 地址与掩码</span><span class="arrow">→</span>
+          <span class="chip">子网划分（大量手算）</span><span class="arrow">→</span>
+          <span class="chip">CIDR / VLSM</span><span class="arrow">→</span>
+          <span class="chip">IP 报文头</span><span class="arrow">→</span>
+          <span class="chip">路由表与静态路由</span><span class="arrow">→</span>
+          <span class="chip">动态路由 OSPF</span><span class="arrow">→</span>
+          <span class="chip">NAT</span><span class="arrow">→</span>
+          <span class="chip">IPv6</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>① 手算 20 道子网划分题（把 192.168.10.0/24 按需求切成不同大小的子网）；② 在模拟器中配置两台路由器 + 三条静态路由，再用 OSPF 重做一遍并对比路由表；③ 用 <code>tracert</code> 观察数据包经过的每一跳。</div>
+    </div>
+  </article>
+
+  <!-- ================= 04 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--amber)">04</div>
+      <div>
+        <h3>传输层与端到端通信<span class="tag core">核心</span></h3>
+        <p class="sub">可靠性从哪来 · 建议 <em>1 周</em> · 难度 ★★★☆☆</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>深入理解 TCP 与 UDP 的本质差异及各自适用场景</li>
+            <li>能画出并解释三次握手、四次挥手的完整状态变化</li>
+            <li>理解 TCP 如何实现可靠传输、流量控制与拥塞控制</li>
+            <li>熟悉端口与 Socket 概念及常见服务端口号</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>端口与 Socket</b>：源/目的端口、四元组、端口分类（知名/注册/动态）</li>
+            <li><b>TCP 报文头</b>：序列号、确认号、标志位（SYN/ACK/FIN/RST/PSH）</li>
+            <li><b>连接管理</b>：三次握手、四次挥手、TIME_WAIT 与半关闭</li>
+            <li><b>可靠传输</b>：确认应答、超时重传、快重传、滑动窗口</li>
+            <li><b>流量控制</b>：接收窗口与零窗口探测</li>
+            <li><b>拥塞控制</b>：慢启动、拥塞避免、快恢复（AIMD）</li>
+            <li><b>UDP</b>：无连接、无可靠性保证、头部仅 8 字节、适用场景（DNS/视频/游戏）</li>
+            <li><b>常见端口</b>：21 / 22 / 23 / 25 / 53 / 80 / 110 / 143 / 443 / 3389</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">端口与 Socket</span><span class="arrow">→</span>
+          <span class="chip">TCP 报文头</span><span class="arrow">→</span>
+          <span class="chip">三次握手 / 四次挥手</span><span class="arrow">→</span>
+          <span class="chip">可靠传输机制</span><span class="arrow">→</span>
+          <span class="chip">流量与拥塞控制</span><span class="arrow">→</span>
+          <span class="chip">UDP 对比</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>用 Wireshark 抓一次完整的 TCP 会话（如打开一个网页），找到 SYN / SYN-ACK / ACK 三个包，跟踪一个 TCP 流的序号变化，并观察连接关闭时四次挥手的过程。</div>
+    </div>
+  </article>
+
+  <!-- ================= 05 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--coral)">05</div>
+      <div>
+        <h3>应用层协议族<span class="tag core">核心</span></h3>
+        <p class="sub">最贴近日常开发与运维 · 建议 <em>2 周</em> · 难度 ★★★☆☆</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>掌握 HTTP/HTTPS 的请求响应模型与 HTTPS 加密流程</li>
+            <li>理解 DNS 的域名结构与递归/迭代解析过程</li>
+            <li>掌握 DHCP 自动分配 IP 的完整交互流程</li>
+            <li>能串联「输入网址到页面显示」的完整网络链路</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>HTTP</b>：请求/响应模型、方法（GET/POST/PUT/DELETE）、状态码（2xx/3xx/4xx/5xx）、头部字段、Cookie 与 Session、连接复用</li>
+            <li><b>HTTP 版本演进</b>：1.1 队头阻塞 → HTTP/2 多路复用 → HTTP/3 基于 QUIC</li>
+            <li><b>HTTPS 与 TLS</b>：对称加密 + 非对称加密 + 哈希、数字证书与 CA、TLS 握手、证书链验证</li>
+            <li><b>DNS</b>：域名层级结构、根/顶级/权威域名服务器、递归与迭代查询、记录类型（A / AAAA / CNAME / MX / NS / TXT / PTR）、缓存与 TTL、DoH/DoT</li>
+            <li><b>DHCP</b>：DORA 四步（Discover / Offer / Request / Ack）、租约与续租、DHCP 中继</li>
+            <li><b>其他常用协议</b>：FTP/SFTP、SMTP/POP3/IMAP、SSH、Telnet、NTP、SNMP、WebSocket</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">HTTP 基础</span><span class="arrow">→</span>
+          <span class="chip">HTTP 版本演进</span><span class="arrow">→</span>
+          <span class="chip">HTTPS / TLS</span><span class="arrow">→</span>
+          <span class="chip">DNS</span><span class="arrow">→</span>
+          <span class="chip">DHCP</span><span class="arrow">→</span>
+          <span class="chip">其他协议</span><span class="arrow">→</span>
+          <span class="chip">全链路串联</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>① 用 <code>curl -v</code> 请求一个网站，逐行读懂请求头与响应头；② 用 <code>nslookup</code> / <code>dig</code> 查询同一域名的 A 记录与 CNAME 记录；③ 在浏览器开发者工具的 Security 面板查看证书链；④ 用 <code>ipconfig /release</code> 与 <code>/renew</code> 抓取一次 DHCP 的 DORA 过程。</div>
+    </div>
+  </article>
+
+  <!-- ================= 06 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--green)">06</div>
+      <div>
+        <h3>网络设备与拓扑结构<span class="tag base">应用</span></h3>
+        <p class="sub">把知识拼成一张真实的网 · 建议 <em>1 周</em> · 难度 ★★☆☆☆</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>清楚每种网络设备工作在 OSI 的哪一层、解决什么问题</li>
+            <li>理解常见拓扑结构的优缺点与适用场景</li>
+            <li>能读懂并绘制一个中小型网络的拓扑图</li>
+            <li>了解无线网络与广域网接入的基本方式</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>设备与工作层次</b>：网卡、中继器/集线器（L1）、交换机（L2）、路由器/三层交换机（L3）、防火墙、负载均衡器、代理服务器、无线 AP/AC</li>
+            <li><b>拓扑结构</b>：总线型、星型、环型、树型、网状、混合型 —— 可靠性、成本、扩展性对比</li>
+            <li><b>层次化组网</b>：接入层 / 汇聚层 / 核心层三层架构</li>
+            <li><b>无线网络</b>：802.11 系列标准、SSID、信道与干扰、WPA2/WPA3 加密</li>
+            <li><b>广域网接入</b>：PPPoE、专线、MPLS、SD-WAN 概览</li>
+            <li><b>冗余与高可用</b>：链路聚合、堆叠、VRRP 双机热备</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">设备与工作层次</span><span class="arrow">→</span>
+          <span class="chip">拓扑结构对比</span><span class="arrow">→</span>
+          <span class="chip">三层网络架构</span><span class="arrow">→</span>
+          <span class="chip">冗余与高可用</span><span class="arrow">→</span>
+          <span class="chip">无线网络</span><span class="arrow">→</span>
+          <span class="chip">广域网接入</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>画出你所在家庭或公司的真实网络拓扑图，标注每个设备的型号、所在层次、IP 地址段与出口链路。</div>
+    </div>
+  </article>
+
+  <!-- ================= 07 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--red)">07</div>
+      <div>
+        <h3>网络安全基础<span class="tag core">核心</span></h3>
+        <p class="sub">知其攻，方能防 · 建议 <em>2 周</em> · 难度 ★★★★☆</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>建立以 CIA 三要素为核心的网络安全认知框架</li>
+            <li>理解对称加密、非对称加密、哈希与数字证书的配合方式</li>
+            <li>掌握防火墙、IDS/IPS、VPN 等主要防护手段的定位</li>
+            <li>能识别常见网络攻击的原理并说出对应防御措施</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>安全模型</b>：CIA 三要素（机密性、完整性、可用性）、威胁与脆弱性、最小权限原则</li>
+            <li><b>密码学基础</b>：对称加密（AES）、非对称加密（RSA/ECC）、哈希（SHA-256）、数字签名、PKI 与 CA 体系</li>
+            <li><b>传输层安全</b>：TLS/SSL 握手、证书验证、HTTPS 全流程回顾</li>
+            <li><b>网络层安全</b>：IPSec、VPN（站点到站点 / 远程接入）</li>
+            <li><b>边界防护</b>：防火墙（包过滤 / 状态检测 / 应用层）、IDS/IPS、WAF、DMZ</li>
+            <li><b>身份与访问控制</b>：AAA、802.1X、RADIUS、零信任思想</li>
+            <li><b>常见攻击</b>：DDoS、中间人攻击、ARP 欺骗、DNS 劫持、端口扫描、暴力破解、SQL 注入、XSS、钓鱼</li>
+            <li><b>安全运维</b>：日志与审计、漏洞管理、应急响应流程</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">CIA 与威胁模型</span><span class="arrow">→</span>
+          <span class="chip">加密与 PKI</span><span class="arrow">→</span>
+          <span class="chip">TLS 深入</span><span class="arrow">→</span>
+          <span class="chip">防火墙与 VPN</span><span class="arrow">→</span>
+          <span class="chip">身份认证</span><span class="arrow">→</span>
+          <span class="chip">常见攻击与防御</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>① 在授权范围内用 Nmap 扫描自己的实验网络，理解端口状态含义；② 用 Wireshark 观察一次未加密 HTTP 登录的明文风险；③ 用 openssl 命令查看一个网站的证书链并解读各字段。</div>
+    </div>
+  </article>
+
+  <!-- ================= 08 ================= -->
+  <article class="stage">
+    <div class="stage-head">
+      <div class="badge" style="background:var(--gray)">08</div>
+      <div>
+        <h3>进阶方向与实战<span class="tag adv">进阶</span></h3>
+        <p class="sub">从会用到会解决 · 建议 <em>持续学习</em> · 难度 ★★★★★</p>
+      </div>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div class="panel">
+          <h4>学习目标</h4>
+          <ul>
+            <li>形成一套可复用的分层排障方法论</li>
+            <li>能独立用抓包工具定位真实网络问题</li>
+            <li>了解网络自动化、云网络与容器网络的演进方向</li>
+            <li>根据职业方向选择深耕领域（运维 / 安全 / 开发 / 云）</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>重点知识点</h4>
+          <ul>
+            <li><b>排障方法论</b>：自下而上 / 自上而下 / 分而治之、常见故障清单（不通、慢、丢包、间歇性）</li>
+            <li><b>抓包分析</b>：Wireshark 显示与捕获过滤器、TCP 流跟踪、专家信息</li>
+            <li><b>性能优化</b>：延迟与带宽分析、QoS、流量整形、CDN</li>
+            <li><b>网络自动化</b>：Python + Netmiko / Paramiko、Ansible、NETCONF / YANG</li>
+            <li><b>SDN</b>：控制面与数据面分离、OpenFlow、VXLAN Overlay</li>
+            <li><b>云网络</b>：VPC、子网与路由表、安全组 / ACL、负载均衡、专线接入</li>
+            <li><b>容器网络</b>：Docker 网络模式、Kubernetes CNI、Service 与 Ingress</li>
+            <li><b>前沿方向</b>：IPv6 规模部署、Wi-Fi 6/7、5G、零信任架构、可观测性</li>
+          </ul>
+        </div>
+      </div>
+      <div class="order-block">
+        <h4>推荐学习顺序</h4>
+        <div class="chain">
+          <span class="chip">排障方法论</span><span class="arrow">→</span>
+          <span class="chip">抓包实战</span><span class="arrow">→</span>
+          <span class="chip">性能分析</span><span class="arrow">→</span>
+          <span class="chip">自动化</span><span class="arrow">→</span>
+          <span class="chip">云与容器网络</span><span class="arrow">→</span>
+          <span class="chip">选定深耕方向</span>
+        </div>
+      </div>
+      <div class="practice"><b>实践任务：</b>完整排查一个真实故障（例如「某台机器能 ping 通但打不开网页」），写出从现象到根因的推理过程；再用 Python 写一个批量配置多台交换机的脚本。</div>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2 class="sec">学习环境与工具</h2>
+  <p class="sec-sub">理论、抓包、模拟器三条主线并行，效果最好。</p>
+  <div class="cards">
+    <div class="card">
+      <h4>抓包与分析</h4>
+      <ul>
+        <li><code>Wireshark</code> 图形化抓包分析</li>
+        <li><code>tcpdump</code> 命令行抓包</li>
+        <li>浏览器开发者工具（Network / Security）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>常用命令行工具</h4>
+      <ul>
+        <li><code>ping</code> / <code>traceroute</code> / <code>tracert</code></li>
+        <li><code>ipconfig</code> / <code>ifconfig</code> / <code>ip</code></li>
+        <li><code>netstat</code> / <code>ss</code> / <code>arp</code> / <code>route</code></li>
+        <li><code>nslookup</code> / <code>dig</code> / <code>curl</code> / <code>telnet</code></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>网络模拟器</h4>
+      <ul>
+        <li><code>Cisco Packet Tracer</code> 入门首选，轻量易上手</li>
+        <li><code>GNS3</code> / <code>EVE-NG</code> 更接近真实设备</li>
+        <li><code>eNSP</code> 华为设备模拟</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>实验环境</h4>
+      <ul>
+        <li>VMware / VirtualBox 开多台 Linux 虚拟机</li>
+        <li>Docker 快速搭建网络实验拓扑</li>
+        <li>云服务器一台，练习公网与安全组配置</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">推荐学习资源</h2>
+  <p class="sec-sub">按「教材打底 → 课程系统化 → 认证检验」三条线选择。</p>
+  <div class="cards">
+    <div class="card">
+      <h4>经典教材</h4>
+      <ul>
+        <li>《计算机网络：自顶向下方法》—— 入门最佳，先看应用层，符合直觉</li>
+        <li>《TCP/IP 详解 卷一》—— 协议细节的权威参考</li>
+        <li>《网络是怎样连接的》—— 通俗易懂，适合打通全链路</li>
+        <li>《图解 HTTP》《图解 TCP/IP》—— 图文并茂，快速建立概念</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>在线课程</h4>
+      <ul>
+        <li>Stanford CS144：计算机网络（动手实现 TCP，含金量高）</li>
+        <li>哈尔滨工业大学《计算机网络》（中国大学 MOOC）</li>
+        <li>Cisco CCNA 官方课程 / 华为 HCIA-Datacom</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>认证路线（可选）</h4>
+      <ul>
+        <li>入门：CCNA / HCIA-Datacom</li>
+        <li>进阶：CCNP / HCIP-Datacom</li>
+        <li>方向：CISSP（安全）、CKA（云原生网络）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>优质网站</h4>
+      <ul>
+        <li>Cloudflare Learning Center —— 概念讲解极清晰</li>
+        <li>IETF RFC 文档 —— 协议的最终依据</li>
+        <li>Wireshark Wiki —— 抓包案例与过滤器语法</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">阶段自测清单</h2>
+  <p class="sec-sub">每一项都能独立讲清楚，才算真正掌握。建议每完成一个阶段就自测一次。</p>
+  <div class="callout">
+    <ul class="check">
+      <li>能画出 OSI 七层与 TCP/IP 四层的对应图，并说出每层职责</li>
+      <li>能描述一次 HTTP 请求从应用到网线的完整封装过程</li>
+      <li>能在 2 分钟内手算出一个 /24 网段划分成 4 个子网的全部信息</li>
+      <li>能解释 VLSM 与 CIDR 的区别与用途</li>
+      <li>能说清路由器的逐跳转发与最长前缀匹配</li>
+      <li>能默画 TCP 三次握手与四次挥手的时序图</li>
+      <li>能解释 TCP 如何做到可靠传输与拥塞控制</li>
+      <li>能完整讲出「输入网址到页面显示」的全过程</li>
+      <li>能说明 HTTPS 握手中对称加密与非对称加密各自的作用</li>
+      <li>能描述 DNS 的递归查询与迭代查询的区别</li>
+      <li>能说出 DHCP 的 DORA 四步及租约续期机制</li>
+      <li>能对比五种网络拓扑结构的优缺点</li>
+      <li>能说出常见网络攻击的原理与至少一种防御手段</li>
+      <li>能用 Wireshark 定位一个「网页打不开」的故障点</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  网络基础知识系统化学习路径 · 建议按阶段推进，每阶段完成「理论学习 + 抓包观察 + 模拟器实操」三件套后再进入下一阶段
+</footer>
+
+</div>
+</body>
+</html>
