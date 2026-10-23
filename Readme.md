@@ -2,7 +2,7 @@
 
 这里存放一系列**知识讲解类 HTML 学习页面**。
 
-[Go site](https://serenyth.github.io/studys/)
+[Go site 在线学习](https://serenyth.github.io/studys/)
 
 ## 关于内容
 
