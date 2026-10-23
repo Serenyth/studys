@@ -2,6 +2,8 @@
 
 这里存放一系列**知识讲解类 HTML 学习页面**。
 
+[Go site](!https://serenyth.github.io/studys/)
+
 ## 关于内容
 
 本仓库中的学习页面，内容均由 **AI 收集、整理后生成**。
