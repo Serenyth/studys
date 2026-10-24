@@ -22,6 +22,7 @@
 | --- | --- | --- |
 | [PacketFlow](./PacketFlow/index.html) | 计算机网络可视化学习平台，7 个阶段、动画与可交互模型 | [进入学习](./PacketFlow/index.html) |
 | [AI Ops Atlas](./ai-ops-atlas/index.html) | 算力控制台 · AI 运维工程师 16 周学习图谱，7 阶段、198 章节、21 个交互可视化 | [进入学习](./ai-ops-atlas/index.html) |
+| [SEC · ATLAS](./security-learning-hub/index.html) | 网络安全 L1–L6 交互式学习图谱，72 章、70 个原理动画 | [进入学习](./security-learning-hub/index.html) |
 
 > 在仓库根目录打开 `index.html` 即可从首页快速跳转到各个项目。
 
@@ -32,5 +33,6 @@ endless_html/
 ├── index.html          # 首页：项目索引与快速跳转
 ├── PacketFlow/         # 计算机网络可视化学习项目
 ├── ai-ops-atlas/       # AI 运维工程师 16 周学习图谱
+├── security-learning-hub/  # 网络安全 L1–L6 交互式学习图谱
 └── ...                 # 后续新增的学习项目
 ```
